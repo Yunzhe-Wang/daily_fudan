@@ -64,7 +64,7 @@ class Fudan:
         :return: 登录页page source
         """
         logging.debug("Initiating——")
-        page_login = self.session.get(self.url_login)
+        page_login = self.session.get(self.url_login, verify = False)
 
         logging.debug("return status code " + str(page_login.status_code))
 
@@ -128,7 +128,7 @@ class Fudan:
         执行登出
         """
         exit_url = 'https://uis.fudan.edu.cn/authserver/logout?service=/authserver/login'
-        expire = self.session.get(exit_url).headers.get('Set-Cookie')
+        expire = self.session.get(exit_url, verify = False).headers.get('Set-Cookie')
 
         if '01-Jan-1970' in expire:
             logging.debug("登出完毕")
